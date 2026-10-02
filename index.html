@@ -65,12 +65,15 @@ footer{text-align:center;color:var(--mut);font-weight:500;padding:28px 0 8px}
 
 :root{--out:cubic-bezier(.16,1,.3,1);--sp:cubic-bezier(.3,1.5,.5,1)}
 header .bar{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-header{animation:drop .6s var(--out) both}@keyframes drop{from{opacity:0;transform:translateY(-20px)}}
+header{animation:drop .6s var(--out) backwards}@keyframes drop{from{opacity:0;transform:translateY(-20px)}}
 #top{animation:up .7s var(--out) both}@keyframes up{from{opacity:0;transform:translateY(20px)}}
 .rv{opacity:0;transform:translateY(20px);transition:opacity .5s var(--out),transform .6s var(--out)}.rv.on{opacity:1;transform:none}
 .st .gl:hover,.wg .card:hover{transform:translateY(-3px)}
 .rm li.done i{animation:pop .4s var(--sp)}@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}}
 @media (prefers-reduced-motion:reduce){header,#top{animation:none!important}}
+.bi{position:absolute;inset:0;background:var(--art) center/cover}
+:root{--hb:rgba(20,24,46,.72)}:root[data-theme="light"]{--hb:rgba(255,255,255,.8)}
+header .bar.gl{background:var(--hb)}
 </style></head><body><div class="bgi"></div><div class="bgo"></div><div class="pg" id="pg"></div>
 <header><div class="bar gl"><div class="av" role="img" aria-label="Foto profil owner Skyline"></div><strong>Shiroko MD</strong>
 <button class="sw" id="th" aria-label="Ganti tema"><i id="ti">🌙</i></button><button class="mb" id="mb" aria-label="Buka menu" aria-expanded="false">☰</button></div>
