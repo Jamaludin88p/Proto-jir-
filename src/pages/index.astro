@@ -30,6 +30,9 @@ const skills = [
   { name: 'Astro', note: 'Fast modern web stack' },
 ];
 
+const ticker = ['JavaScript', 'HTML', 'CSS', 'Astro', 'WhatsApp', 'Automation'];
+const tickerGroup = [...ticker, ...ticker, ...ticker];
+
 const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.removeAttribute('hidden')";
 ---
 
@@ -40,10 +43,25 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#070913" />
     <meta name="description" content="Portofolio resmi Shiroko MD — WhatsApp bot milik Skyline." />
+    <meta property="og:title" content="Shiroko MD — WhatsApp Bot Portfolio" />
+    <meta property="og:description" content="Portofolio resmi Shiroko MD — WhatsApp bot milik Skyline." />
+    <meta property="og:image" content={bot.image} />
     <link rel="icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://u.pone.rs" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <title>Shiroko MD — WhatsApp Bot Portfolio</title>
   </head>
-  <body class="page-loading">
+  <body>
+    <div class="bg" aria-hidden="true">
+      <span class="blob blob-a"></span>
+      <span class="blob blob-b"></span>
+      <span class="blob blob-c"></span>
+    </div>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+
     <header class="topbar">
       <div class="container nav">
         <a class="brand" href="#top" aria-label="Shiroko MD home">
@@ -69,13 +87,16 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
     <main id="top">
       <section class="hero">
         <div class="container hero-grid">
-          <div class="reveal reveal-up">
-            <span class="eyebrow"><span class="status-dot"></span> Automation • WhatsApp • Astro</span>
-            <h1>Meet <span class="gradient-text">Shiroko MD.</span></h1>
-            <p class="hero-copy">
+          <div>
+            <span class="eyebrow fx" style="--i:0"><span class="status-dot"></span> Automation • WhatsApp • Astro</span>
+            <h1>
+              <span class="line"><span class="word" style="--i:0">Meet</span></span>
+              <span class="line"><span class="word gradient-text" style="--i:1">Shiroko MD.</span></span>
+            </h1>
+            <p class="hero-copy fx" style="--i:3">
               Bot WhatsApp yang dirancang untuk membantu otomasi, utilitas, dan interaksi komunitas — dibangun oleh <strong>Skyline</strong> dengan stack web modern.
             </p>
-            <div class="hero-actions">
+            <div class="hero-actions fx" style="--i:4">
               <a class="btn btn-primary" href={links.bot} target="_blank" rel="noreferrer">
                 Chat Bot
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -84,25 +105,34 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
             </div>
           </div>
 
-          <div class="hero-card reveal reveal-right" data-tilt>
+          <div class="hero-card-wrap fx" style="--i:2">
             <span class="orb orb-a" aria-hidden="true"></span>
             <span class="orb orb-b" aria-hidden="true"></span>
-            <div class="bot-visual">
-              <img src={bot.image} alt="Thumbnail Shiroko MD" onerror={externalImageFallback} />
-              <div hidden class="bot-overlay">Image unavailable</div>
-              <div class="bot-overlay">
-                <div class="bot-overlay-row">
-                  <div>
-                    <div class="bot-name">{bot.name}</div>
-                    <div class="bot-tag">Owner: {bot.owner}</div>
+            <div class="hero-card spot" data-tilt>
+              <div class="bot-visual">
+                <img class="fade" src={bot.image} alt="Thumbnail Shiroko MD" width="640" height="720" fetchpriority="high" decoding="async" onerror={externalImageFallback} />
+                <div hidden class="bot-overlay bot-fallback">Image unavailable</div>
+                <div class="bot-overlay">
+                  <div class="bot-overlay-row">
+                    <div>
+                      <div class="bot-name">{bot.name}</div>
+                      <div class="bot-tag">Owner: {bot.owner}</div>
+                    </div>
+                    <span class="chip">READY</span>
                   </div>
-                  <span class="chip">READY</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-group">{tickerGroup.map((t) => <span>{t}</span>)}</div>
+          <div class="marquee-group">{tickerGroup.map((t) => <span>{t}</span>)}</div>
+        </div>
+      </div>
 
       <section class="section reveal-section" id="about">
         <div class="container">
@@ -115,10 +145,10 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
           </div>
 
           <div class="grid-2">
-            <article class="card card-inner reveal reveal-up stagger-1">
+            <article class="card card-inner spot reveal stagger-1">
               <div class="bot-profile">
                 <div class="avatar">
-                  <img src={bot.image} alt="Avatar Shiroko MD" onerror={externalImageFallback} />
+                  <img class="fade" src={bot.image} alt="Avatar Shiroko MD" width="78" height="78" loading="lazy" decoding="async" onerror={externalImageFallback} />
                 </div>
                 <div>
                   <div class="profile-label">Bot profile</div>
@@ -133,10 +163,10 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
               </div>
             </article>
 
-            <article class="card card-inner reveal reveal-up stagger-2">
+            <article class="card card-inner spot reveal stagger-2">
               <div class="owner-card">
                 <div class="owner-avatar">
-                  <img src={owner.image} alt="Profile owner Skyline" onerror={externalImageFallback} />
+                  <img class="fade" src={owner.image} alt="Profile owner Skyline" width="78" height="78" loading="lazy" decoding="async" onerror={externalImageFallback} />
                 </div>
                 <div>
                   <div class="profile-label">Owner</div>
@@ -166,7 +196,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
 
           <div class="skill-grid">
             {skills.map((skill, index) => (
-              <article class="skill reveal reveal-up" style={`--delay:${index * 90}ms`} data-index={`0${index + 1}`}>
+              <article class="skill spot reveal" style={`--delay:${index * 80}ms`} data-index={`0${index + 1}`}>
                 <div class="skill-number">Skill 0{index + 1}</div>
                 <div class="skill-title">{skill.name}</div>
                 <div class="skill-note">{skill.note}</div>
@@ -187,17 +217,17 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
           </div>
 
           <div class="links-grid">
-            <a class="card link-card reveal reveal-up" href={links.group} target="_blank" rel="noreferrer">
+            <a class="card link-card spot reveal" href={links.group} target="_blank" rel="noreferrer">
               <span class="link-icon" aria-hidden="true">◈</span>
               <span><h3>WhatsApp Group</h3><p>Gabung komunitas</p></span>
               <span class="link-arrow" aria-hidden="true">↗</span>
             </a>
-            <a class="card link-card reveal reveal-up" href={links.channel} target="_blank" rel="noreferrer">
+            <a class="card link-card spot reveal" href={links.channel} target="_blank" rel="noreferrer">
               <span class="link-icon" aria-hidden="true">◉</span>
               <span><h3>WhatsApp Channel</h3><p>Update & informasi</p></span>
               <span class="link-arrow" aria-hidden="true">↗</span>
             </a>
-            <a class="card link-card reveal reveal-up" href={links.owner} target="_blank" rel="noreferrer">
+            <a class="card link-card spot reveal" href={links.owner} target="_blank" rel="noreferrer">
               <span class="link-icon" aria-hidden="true">✦</span>
               <span><h3>Contact Owner</h3><p>Chat dengan Skyline</p></span>
               <span class="link-arrow" aria-hidden="true">↗</span>
@@ -208,7 +238,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
 
       <section class="section reveal-section" aria-label="Ajakan">
         <div class="container">
-          <div class="cta">
+          <div class="cta reveal">
             <div>
               <h3>Talk to Shiroko.</h3>
               <p>Mulai percakapan langsung lewat WhatsApp dan kenali Shiroko MD lebih dekat.</p>
@@ -227,14 +257,17 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
     </footer>
 
     <script>
+      const doc = document.documentElement;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+      /* ---- Menu mobile ---- */
       const menu = document.querySelector('#menu-btn');
       const nav = document.querySelector('#nav-links');
-
       menu?.addEventListener('click', () => {
         const open = nav?.classList.toggle('is-open') ?? false;
-        menu?.setAttribute('aria-expanded', String(open));
+        menu.setAttribute('aria-expanded', String(open));
       });
-
       nav?.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => {
           nav.classList.remove('is-open');
@@ -242,37 +275,104 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
         });
       });
 
-      window.requestAnimationFrame(() => document.body.classList.remove('page-loading'));
+      /* ---- Scroll: progress bar + state topbar (1 handler, throttled rAF) ---- */
+      const bar = document.querySelector('#progress');
+      const topbar = document.querySelector('.topbar');
+      let maxScroll = 1;
+      let ticking = false;
+      const measure = () => { maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight); };
+      const paintScroll = () => {
+        const y = window.scrollY;
+        if (bar) bar.style.transform = `scaleX(${Math.min(1, y / maxScroll)})`;
+        topbar?.classList.toggle('is-scrolled', y > 8);
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(paintScroll);
+      }, { passive: true });
+      window.addEventListener('resize', () => { measure(); paintScroll(); }, { passive: true });
+      window.addEventListener('load', measure);
+      measure(); paintScroll();
 
+      /* ---- Reveal saat scroll ---- */
       const revealItems = document.querySelectorAll('.reveal');
-      const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        });
-      }, { threshold: 0.14, rootMargin: '0px 0px -45px 0px' });
-      revealItems.forEach((item) => revealObserver.observe(item));
-
-      const tilt = document.querySelector('[data-tilt]');
-      if (tilt && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.matchMedia('(pointer:fine)').matches) {
-        tilt.addEventListener('pointermove', (event) => {
-          const rect = tilt.getBoundingClientRect();
-          const x = (event.clientX - rect.left) / rect.width - 0.5;
-          const y = (event.clientY - rect.top) / rect.height - 0.5;
-          tilt.style.setProperty('--rx', `${y * -3}deg`);
-          tilt.style.setProperty('--ry', `${x * 4}deg`);
-          tilt.style.setProperty('--mx', `${(x + 0.5) * 100}%`);
-          tilt.style.setProperty('--my', `${(y + 0.5) * 100}%`);
-        });
-        tilt.addEventListener('pointerleave', () => {
-          tilt.style.setProperty('--rx', '0deg');
-          tilt.style.setProperty('--ry', '0deg');
-          tilt.style.setProperty('--mx', '50%');
-          tilt.style.setProperty('--my', '50%');
-        });
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealItems.forEach((el) => el.classList.add('is-visible', 'done'));
+      } else {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            el.classList.add('is-visible');
+            // setelah animasi masuk selesai, kembalikan transition hover yang cepat
+            window.setTimeout(() => el.classList.add('done'), 1100);
+            observer.unobserve(el);
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealItems.forEach((el) => revealObserver.observe(el));
       }
 
+      /* ---- Nav aktif sesuai section ---- */
+      const navLinks = [...document.querySelectorAll('.nav-links a')];
+      if ('IntersectionObserver' in window) {
+        const spy = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach((a) => a.setAttribute('aria-current', String(a.getAttribute('href') === `#${entry.target.id}`)));
+          });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        document.querySelectorAll('section[id]').forEach((sec) => spy.observe(sec));
+      }
+
+      /* ---- Fade-in gambar setelah ter-load ---- */
+      document.querySelectorAll('img.fade').forEach((img) => {
+        if (img.complete && img.naturalWidth) img.classList.add('is-loaded');
+        else img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+      });
+
+      /* ---- Spotlight kursor (delegasi event, throttled rAF, hanya mouse) ---- */
+      if (finePointer && !reduceMotion) {
+        let frame = 0;
+        let last = null;
+        document.addEventListener('pointermove', (event) => {
+          const el = event.target instanceof Element ? event.target.closest('.spot') : null;
+          if (!el) return;
+          last = { el, x: event.clientX, y: event.clientY };
+          if (frame) return;
+          frame = requestAnimationFrame(() => {
+            frame = 0;
+            if (!last) return;
+            const rect = last.el.getBoundingClientRect();
+            last.el.style.setProperty('--sx', `${last.x - rect.left}px`);
+            last.el.style.setProperty('--sy', `${last.y - rect.top}px`);
+          });
+        }, { passive: true });
+      }
+
+      /* ---- Tilt halus (lerp di rAF; loop berhenti sendiri saat diam) ---- */
+      const tilt = document.querySelector('[data-tilt]');
+      if (tilt && finePointer && !reduceMotion) {
+        let tx = 0, ty = 0, cx = 0, cy = 0, running = false;
+        const step = () => {
+          cx += (tx - cx) * 0.1;
+          cy += (ty - cy) * 0.1;
+          tilt.style.transform = `perspective(1100px) rotateX(${cy.toFixed(2)}deg) rotateY(${cx.toFixed(2)}deg)`;
+          if (Math.abs(tx - cx) > 0.01 || Math.abs(ty - cy) > 0.01) requestAnimationFrame(step);
+          else { running = false; if (tx === 0 && ty === 0) tilt.style.transform = ''; }
+        };
+        const kick = () => { if (!running) { running = true; requestAnimationFrame(step); } };
+        tilt.addEventListener('pointermove', (event) => {
+          const rect = tilt.getBoundingClientRect();
+          tx = ((event.clientX - rect.left) / rect.width - 0.5) * 7;
+          ty = ((event.clientY - rect.top) / rect.height - 0.5) * -5;
+          kick();
+        }, { passive: true });
+        tilt.addEventListener('pointerleave', () => { tx = 0; ty = 0; kick(); });
+      }
+
+      /* ---- Copy nomor ---- */
       document.querySelectorAll('[data-copy]').forEach((button) => {
         button.addEventListener('click', async () => {
           const value = button.getAttribute('data-copy');
@@ -280,8 +380,8 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
           try {
             await navigator.clipboard.writeText(value);
             const original = button.textContent;
-            button.textContent = 'Copied!';
-            window.setTimeout(() => { button.textContent = original; }, 1100);
+            button.textContent = 'Copied ✓';
+            window.setTimeout(() => { button.textContent = original; }, 1200);
           } catch {
             button.textContent = value;
           }
