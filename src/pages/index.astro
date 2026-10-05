@@ -93,6 +93,10 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
               <span class="line"><span class="word" style="--i:0">Meet</span></span>
               <span class="line"><span class="word gradient-text" style="--i:1">Shiroko MD.</span></span>
             </h1>
+            <p class="rotator fx" style="--i:2" aria-live="off">
+              <span class="rotator-label">Dibuat untuk</span>
+              <span class="rotator-word" id="rotator">otomasi</span>
+            </p>
             <p class="hero-copy fx" style="--i:3">
               Bot WhatsApp yang dirancang untuk membantu otomasi, utilitas, dan interaksi komunitas — dibangun oleh <strong>Skyline</strong> dengan stack web modern.
             </p>
@@ -108,6 +112,9 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
           <div class="hero-card-wrap fx" style="--i:2">
             <span class="orb orb-a" aria-hidden="true"></span>
             <span class="orb orb-b" aria-hidden="true"></span>
+            <span class="float-chip c1" aria-hidden="true"><i></i>JavaScript</span>
+            <span class="float-chip c2" aria-hidden="true"><i></i>Astro</span>
+            <span class="float-chip c3" aria-hidden="true"><i></i>WhatsApp</span>
             <div class="hero-card spot" data-tilt>
               <div class="bot-visual">
                 <img class="fade" src={bot.image} alt="Thumbnail Shiroko MD" width="640" height="720" fetchpriority="high" decoding="async" onerror={externalImageFallback} />
@@ -197,6 +204,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
           <div class="skill-grid">
             {skills.map((skill, index) => (
               <article class="skill spot reveal" style={`--delay:${index * 80}ms`} data-index={`0${index + 1}`}>
+                <span class="skill-glyph" aria-hidden="true">{skill.name.slice(0, 2)}</span>
                 <div class="skill-number">Skill 0{index + 1}</div>
                 <div class="skill-title">{skill.name}</div>
                 <div class="skill-note">{skill.note}</div>
@@ -370,6 +378,22 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
           kick();
         }, { passive: true });
         tilt.addEventListener('pointerleave', () => { tx = 0; ty = 0; kick(); });
+      }
+
+      /* ---- Kata berganti di hero ---- */
+      const rotator = document.querySelector('#rotator');
+      if (rotator && !reduceMotion) {
+        const words = ['otomasi', 'utilitas', 'komunitas', 'interaksi'];
+        let i = 0;
+        window.setInterval(() => {
+          if (document.hidden) return;
+          rotator.classList.add('is-out');
+          window.setTimeout(() => {
+            i = (i + 1) % words.length;
+            rotator.textContent = words[i];
+            rotator.classList.remove('is-out');
+          }, 350);
+        }, 2600);
       }
 
       /* ---- Copy nomor ---- */
