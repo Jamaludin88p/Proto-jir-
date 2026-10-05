@@ -1,0 +1,259 @@
+---
+import '../styles/global.css';
+
+const bot = {
+  name: 'Shiroko MD',
+  owner: 'Skyline',
+  number: '085185757240',
+  numberIntl: '6285185757240',
+  image: 'https://u.pone.rs/dtnqjlqd.jpg',
+};
+
+const owner = {
+  name: 'Skyline',
+  number: '085134116039',
+  numberIntl: '6285134116039',
+  image: 'https://u.pone.rs/lhshmmdb.jpg',
+};
+
+const links = {
+  group: 'https://chat.whatsapp.com/CKThNoXDDJt3zW6A1vH9Td?s=cl&p=a&mlu=4&iam=2',
+  channel: 'https://whatsapp.com/channel/0029VbDi830Eawdl50lDVv24',
+  owner: `https://wa.me/${owner.numberIntl}`,
+  bot: `https://wa.me/${bot.numberIntl}`,
+};
+
+const skills = [
+  { name: 'JavaScript', note: 'Bot logic & automation' },
+  { name: 'HTML', note: 'Structure & semantic UI' },
+  { name: 'CSS', note: 'Responsive visual system' },
+  { name: 'Astro', note: 'Fast modern web stack' },
+];
+
+const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.removeAttribute('hidden')";
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#070913" />
+    <meta name="description" content="Portofolio resmi Shiroko MD — WhatsApp bot milik Skyline." />
+    <link rel="icon" href="/favicon.svg" />
+    <title>Shiroko MD — WhatsApp Bot Portfolio</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav">
+        <a class="brand" href="#top" aria-label="Shiroko MD home">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span>
+            <small>WhatsApp Bot</small>
+            <strong>Shiroko MD</strong>
+          </span>
+        </a>
+
+        <nav class="nav-links" id="nav-links" aria-label="Navigasi utama">
+          <a href="#about">Tentang</a>
+          <a href="#skills">Skill</a>
+          <a href="#community">Komunitas</a>
+        </nav>
+
+        <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Buka menu">
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow"><span class="status-dot"></span> Automation • WhatsApp • Astro</span>
+            <h1>Meet <span class="gradient-text">Shiroko MD.</span></h1>
+            <p class="hero-copy">
+              Bot WhatsApp yang dirancang untuk membantu otomasi, utilitas, dan interaksi komunitas — dibangun oleh <strong>Skyline</strong> dengan stack web modern.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href={links.bot} target="_blank" rel="noreferrer">
+                Chat Bot
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a class="btn btn-ghost" href="#skills">Lihat Skill</a>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="bot-visual">
+              <img src={bot.image} alt="Thumbnail Shiroko MD" onerror={externalImageFallback} />
+              <div hidden class="bot-overlay">Image unavailable</div>
+              <div class="bot-overlay">
+                <div class="bot-overlay-row">
+                  <div>
+                    <div class="bot-name">{bot.name}</div>
+                    <div class="bot-tag">Owner: {bot.owner}</div>
+                  </div>
+                  <span class="chip">READY</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">01 / Identity</div>
+              <h2 class="section-title">Satu bot. Satu identitas.</h2>
+            </div>
+            <p class="section-copy">Profil singkat bot dan owner, dibuat ringkas supaya informasi penting tetap mudah ditemukan.</p>
+          </div>
+
+          <div class="grid-2">
+            <article class="card card-inner">
+              <div class="bot-profile">
+                <div class="avatar">
+                  <img src={bot.image} alt="Avatar Shiroko MD" onerror={externalImageFallback} />
+                </div>
+                <div>
+                  <div class="profile-label">Bot profile</div>
+                  <div class="profile-value">{bot.name}</div>
+                  <div class="profile-sub">Managed by {bot.owner}</div>
+                </div>
+              </div>
+              <div class="meta-list">
+                <div class="meta-row"><span>Nomor bot</span><strong><button class="copy-btn" data-copy={bot.number}>{bot.number}</button></strong></div>
+                <div class="meta-row"><span>Platform</span><strong>WhatsApp</strong></div>
+                <div class="meta-row"><span>Core</span><strong>Automation</strong></div>
+              </div>
+            </article>
+
+            <article class="card card-inner">
+              <div class="owner-card">
+                <div class="owner-avatar">
+                  <img src={owner.image} alt="Profile owner Skyline" onerror={externalImageFallback} />
+                </div>
+                <div>
+                  <div class="profile-label">Owner</div>
+                  <div class="profile-value">{owner.name}</div>
+                  <div class="profile-sub">Developer & maintainer</div>
+                </div>
+              </div>
+              <div class="meta-list">
+                <div class="meta-row"><span>Nomor owner</span><strong><button class="copy-btn" data-copy={owner.number}>{owner.number}</button></strong></div>
+                <div class="meta-row"><span>Role</span><strong>Bot Developer</strong></div>
+                <div class="meta-row"><span>Profile</span><strong><a href={links.owner} target="_blank" rel="noreferrer">WhatsApp →</a></strong></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">02 / Stack</div>
+              <h2 class="section-title">Teknologi di balik Shiroko.</h2>
+            </div>
+            <p class="section-copy">Empat teknologi utama yang digunakan untuk membangun dan mengembangkan ekosistem Shiroko MD.</p>
+          </div>
+
+          <div class="skill-grid">
+            {skills.map((skill, index) => (
+              <article class="skill" data-index={`0${index + 1}`}>
+                <div class="skill-number">Skill 0{index + 1}</div>
+                <div class="skill-title">{skill.name}</div>
+                <div class="skill-note">{skill.note}</div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="community">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">03 / Connect</div>
+              <h2 class="section-title">Tetap terhubung dengan Shiroko.</h2>
+            </div>
+            <p class="section-copy">Pilih kanal yang paling nyaman untuk mengikuti update atau menghubungi Skyline.</p>
+          </div>
+
+          <div class="links-grid">
+            <a class="card link-card" href={links.group} target="_blank" rel="noreferrer">
+              <span class="link-icon" aria-hidden="true">◈</span>
+              <span><h3>WhatsApp Group</h3><p>Gabung komunitas</p></span>
+              <span class="link-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="card link-card" href={links.channel} target="_blank" rel="noreferrer">
+              <span class="link-icon" aria-hidden="true">◉</span>
+              <span><h3>WhatsApp Channel</h3><p>Update & informasi</p></span>
+              <span class="link-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="card link-card" href={links.owner} target="_blank" rel="noreferrer">
+              <span class="link-icon" aria-hidden="true">✦</span>
+              <span><h3>Contact Owner</h3><p>Chat dengan Skyline</p></span>
+              <span class="link-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Ajakan">
+        <div class="container">
+          <div class="cta">
+            <div>
+              <h3>Talk to Shiroko.</h3>
+              <p>Mulai percakapan langsung lewat WhatsApp dan kenali Shiroko MD lebih dekat.</p>
+            </div>
+            <a class="btn btn-primary" href={links.bot} target="_blank" rel="noreferrer">Open WhatsApp →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-row">
+        <span>© {new Date().getFullYear()} Shiroko MD · Skyline</span>
+        <span>Built with Astro</span>
+      </div>
+    </footer>
+
+    <script>
+      const menu = document.querySelector('#menu-btn');
+      const nav = document.querySelector('#nav-links');
+
+      menu?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('is-open') ?? false;
+        menu?.setAttribute('aria-expanded', String(open));
+      });
+
+      nav?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('is-open');
+          menu?.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.querySelectorAll('[data-copy]').forEach((button) => {
+        button.addEventListener('click', async () => {
+          const value = button.getAttribute('data-copy');
+          if (!value) return;
+          try {
+            await navigator.clipboard.writeText(value);
+            const original = button.textContent;
+            button.textContent = 'Copied!';
+            window.setTimeout(() => { button.textContent = original; }, 1100);
+          } catch {
+            button.textContent = value;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
