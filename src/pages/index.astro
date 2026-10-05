@@ -43,7 +43,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
     <link rel="icon" href="/favicon.svg" />
     <title>Shiroko MD — WhatsApp Bot Portfolio</title>
   </head>
-  <body>
+  <body class="page-loading">
     <header class="topbar">
       <div class="container nav">
         <a class="brand" href="#top" aria-label="Shiroko MD home">
@@ -69,7 +69,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
     <main id="top">
       <section class="hero">
         <div class="container hero-grid">
-          <div>
+          <div class="reveal reveal-up">
             <span class="eyebrow"><span class="status-dot"></span> Automation • WhatsApp • Astro</span>
             <h1>Meet <span class="gradient-text">Shiroko MD.</span></h1>
             <p class="hero-copy">
@@ -84,7 +84,9 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
             </div>
           </div>
 
-          <div class="hero-card">
+          <div class="hero-card reveal reveal-right" data-tilt>
+            <span class="orb orb-a" aria-hidden="true"></span>
+            <span class="orb orb-b" aria-hidden="true"></span>
             <div class="bot-visual">
               <img src={bot.image} alt="Thumbnail Shiroko MD" onerror={externalImageFallback} />
               <div hidden class="bot-overlay">Image unavailable</div>
@@ -102,7 +104,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
         </div>
       </section>
 
-      <section class="section" id="about">
+      <section class="section reveal-section" id="about">
         <div class="container">
           <div class="section-head">
             <div>
@@ -113,7 +115,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
           </div>
 
           <div class="grid-2">
-            <article class="card card-inner">
+            <article class="card card-inner reveal reveal-up stagger-1">
               <div class="bot-profile">
                 <div class="avatar">
                   <img src={bot.image} alt="Avatar Shiroko MD" onerror={externalImageFallback} />
@@ -131,7 +133,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
               </div>
             </article>
 
-            <article class="card card-inner">
+            <article class="card card-inner reveal reveal-up stagger-2">
               <div class="owner-card">
                 <div class="owner-avatar">
                   <img src={owner.image} alt="Profile owner Skyline" onerror={externalImageFallback} />
@@ -152,7 +154,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
         </div>
       </section>
 
-      <section class="section" id="skills">
+      <section class="section reveal-section" id="skills">
         <div class="container">
           <div class="section-head">
             <div>
@@ -164,7 +166,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
 
           <div class="skill-grid">
             {skills.map((skill, index) => (
-              <article class="skill" data-index={`0${index + 1}`}>
+              <article class="skill reveal reveal-up" style={`--delay:${index * 90}ms`} data-index={`0${index + 1}`}>
                 <div class="skill-number">Skill 0{index + 1}</div>
                 <div class="skill-title">{skill.name}</div>
                 <div class="skill-note">{skill.note}</div>
@@ -174,7 +176,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
         </div>
       </section>
 
-      <section class="section" id="community">
+      <section class="section reveal-section" id="community">
         <div class="container">
           <div class="section-head">
             <div>
@@ -185,17 +187,17 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
           </div>
 
           <div class="links-grid">
-            <a class="card link-card" href={links.group} target="_blank" rel="noreferrer">
+            <a class="card link-card reveal reveal-up" href={links.group} target="_blank" rel="noreferrer">
               <span class="link-icon" aria-hidden="true">◈</span>
               <span><h3>WhatsApp Group</h3><p>Gabung komunitas</p></span>
               <span class="link-arrow" aria-hidden="true">↗</span>
             </a>
-            <a class="card link-card" href={links.channel} target="_blank" rel="noreferrer">
+            <a class="card link-card reveal reveal-up" href={links.channel} target="_blank" rel="noreferrer">
               <span class="link-icon" aria-hidden="true">◉</span>
               <span><h3>WhatsApp Channel</h3><p>Update & informasi</p></span>
               <span class="link-arrow" aria-hidden="true">↗</span>
             </a>
-            <a class="card link-card" href={links.owner} target="_blank" rel="noreferrer">
+            <a class="card link-card reveal reveal-up" href={links.owner} target="_blank" rel="noreferrer">
               <span class="link-icon" aria-hidden="true">✦</span>
               <span><h3>Contact Owner</h3><p>Chat dengan Skyline</p></span>
               <span class="link-arrow" aria-hidden="true">↗</span>
@@ -204,7 +206,7 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
         </div>
       </section>
 
-      <section class="section" aria-label="Ajakan">
+      <section class="section reveal-section" aria-label="Ajakan">
         <div class="container">
           <div class="cta">
             <div>
@@ -239,6 +241,37 @@ const externalImageFallback = "this.style.opacity='0'; this.nextElementSibling?.
           menu?.setAttribute('aria-expanded', 'false');
         });
       });
+
+      window.requestAnimationFrame(() => document.body.classList.remove('page-loading'));
+
+      const revealItems = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.14, rootMargin: '0px 0px -45px 0px' });
+      revealItems.forEach((item) => revealObserver.observe(item));
+
+      const tilt = document.querySelector('[data-tilt]');
+      if (tilt && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.matchMedia('(pointer:fine)').matches) {
+        tilt.addEventListener('pointermove', (event) => {
+          const rect = tilt.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width - 0.5;
+          const y = (event.clientY - rect.top) / rect.height - 0.5;
+          tilt.style.setProperty('--rx', `${y * -3}deg`);
+          tilt.style.setProperty('--ry', `${x * 4}deg`);
+          tilt.style.setProperty('--mx', `${(x + 0.5) * 100}%`);
+          tilt.style.setProperty('--my', `${(y + 0.5) * 100}%`);
+        });
+        tilt.addEventListener('pointerleave', () => {
+          tilt.style.setProperty('--rx', '0deg');
+          tilt.style.setProperty('--ry', '0deg');
+          tilt.style.setProperty('--mx', '50%');
+          tilt.style.setProperty('--my', '50%');
+        });
+      }
 
       document.querySelectorAll('[data-copy]').forEach((button) => {
         button.addEventListener('click', async () => {
